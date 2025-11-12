@@ -1,32 +1,31 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const post = [];
+import methodOverride from "method-override";
 
 const app = express();
 const port = 3000;
 
-app.set("view engine", "ejs")
-
 app.use(express.static("src"));
+app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const posts = []; // It will work as a memory for each post
 
 // =================== Home Page ===================
-app.get("/home", (req, res) => {
-    res.render("home.ejs", { post: newPost });
-});
+app.get("/", (req, res) => {
 
+    res.render("home.ejs", { post: posts });
+
+});
 
 // =================== Create ===================
 app.get("/create", (req, res) => {
+
   res.render("create.ejs");
+
 });
 
-app.post("/create", (req, res, next) => {
+app.post("/create", (req, res) => {
 
   const userTittle = req.body.tittle;
   const userContent = req.body.content;
@@ -35,22 +34,56 @@ app.post("/create", (req, res, next) => {
   const creation = date.toLocaleDateString("en-US");
 
   const newPost = {
+    postId: posts.length + 1,
     tittle: userTittle,
     content: userContent,
     dateOfCreation: creation,
   };
 
-  post.push(newPost);
+  posts.push(newPost);
 
-  res.redirect("/home");
+  res.redirect("/");
 
 });
 
+// =================== User Blogs ===================
+
+app.get("/blogs", (req, res) => {
+
+  res.render("blogs.ejs", { post: posts });
+
+});
 
 // =================== Edit and Delete Post ===================
-app.get("/edit", (req,res) => {
-  res.render("edit.ejs")
+
+// page to check if the post exist
+app.get("/edit/:id", (req, res) => {
+  
+  const id = Number(req.params.id); // params gets the post.id value
+  
+  const post = posts.find(item => item.postId === id); // gets the post which is related to the id
+  if (!post) return res.status(404).send("Post not found"); // checks if the post exist
+
+  res.render("edit.ejs", { post });
+
 });
+
+app.put("/edit/:id", (req, res) => {
+
+  const id = Number(req.params.id);
+  const { tittle, content } = req.body;
+
+  const post = posts.find(item => item.postId === id);
+  if (!post) return res.status(404).send("Post not found");
+
+  post.tittle = tittle;
+  post.content = content;
+
+  res.redirect("/");
+
+});
+
+// =================== Port ===================
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

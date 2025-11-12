@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogging | Posts</title>
+    <title>Blogging | Edit</title>
 </head>
 <body>
     
-    posts page
+    <form action="/edit/<%= post.postId %>?_method=PUT" method="post">
+
+        <label for="tittle">Tittle</label>
+        <input type="text" name="tittle" class="tittle" value="<%= post.tittle %>">
+
+        <label for="content">Content</label>
+        <textarea name="content" id="content"><%= post.content %></textarea>
+        <button type="submit">Edit Post</button>
+
+    </form>
 
 </body>
 </html>
