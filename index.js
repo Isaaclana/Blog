@@ -56,7 +56,6 @@ app.get("/blogs", (req, res) => {
 
 // =================== Edit and Delete Post ===================
 
-// page to check if the post exist
 app.get("/edit/:id", (req, res) => {
   
   const id = Number(req.params.id); // params gets the post.id value
@@ -79,7 +78,20 @@ app.put("/edit/:id", (req, res) => {
   post.tittle = tittle;
   post.content = content;
 
-  res.redirect("/");
+  res.redirect("/blogs");
+
+});
+
+app.delete("/edit/:id", (req, res) => {
+
+  const id = Number(req.params.id);
+
+  const post = posts.findIndex(item => item.postId === id); // findIndex() is more appropriated to find an array value. find() only returns the value of the item selected
+  if (post === -1) return res.status(404).send("Post not found");
+
+  posts.splice(post, 1) // removes 1 element in the positioning of post
+
+  res.redirect("/blogs");
 
 });
 

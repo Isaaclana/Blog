@@ -1,26 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogging | Home</title>
-</head>
-<body>
-    
-    <div class="container">
-        <% if (post.length === 0) { %>
-            <p>There is no post yet</p>
-            <a href="/create"><button>Create Post</button></a>
-        <% }else { %>
-            <% post.forEach(item => { %>
-                <div class="card">
-                    <img src="" alt="">
-                    <h3><%= item.tittle %></h3>
-                    <span><%= item.dateOfCreation %></span>
-                </div>
-            <% }); %>
-        <% } %>
-    </div>
+<%- include("/partials/header.ejs") %>
 
-</body>
-</html>
+<div class="container">
+    <% if (post.length === 0) { %>
+        <p>There is no post yet</p>
+        <a href="/create"><button>Create Post</button></a>
+    <% }else { %>
+        <% post.forEach(item => { %>
+            <div class="card">
+                <img src="" alt="">
+                <h3><%= item.tittle %></h3>
+                <span><%= item.dateOfCreation %></span>
+            </div>
+        <% }); %>
+    <% } %>
+</div>
+
+<%- include("/partials/footer.ejs") %>

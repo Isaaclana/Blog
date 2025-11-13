@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogging | Create</title>
-</head>
-<body>
+<%- include("/partials/header.ejs") %>
 
-    <form action="/create" method="post">
+<form action="/create" method="post">
 
-        <label for="tittle">Tittle</label>
-        <input type="text" name="tittle" class="tittle" placeholder="Tittle">
+    <label for="tittle">Tittle</label>
+    <input type="text" name="tittle" class="tittle" placeholder="Tittle">
 
-        <label for="content">Content</label>
-        <input type="text" name="content" class="content" placeholder="Text">
+    <label for="content">Content</label>
+    <input type="text" name="content" class="content" placeholder="Text">
 
-        <button type="submit">Create Post</button>
+    <button type="submit">Create Post</button>
 
-    </form>
+</form>
 
-</body>
-</html>
+<%- include("/partials/footer.ejs") %>
