@@ -14,14 +14,14 @@ const posts = []; // It will work as a memory for each post
 // =================== Home Page ===================
 app.get("/", (req, res) => {
 
-    res.render("home.ejs", { post: posts });
+    res.render("home.ejs", { post: posts, pageName: "Home" });
 
 });
 
 // =================== Create ===================
 app.get("/create", (req, res) => {
 
-  res.render("create.ejs");
+  res.render("create.ejs", { pageName: "Create" });
 
 });
 
@@ -50,7 +50,7 @@ app.post("/create", (req, res) => {
 
 app.get("/blogs", (req, res) => {
 
-  res.render("blogs.ejs", { post: posts });
+  res.render("blogs.ejs", { post: posts, pageName: "My Posts" });
 
 });
 
@@ -63,7 +63,7 @@ app.get("/edit/:id", (req, res) => {
   const post = posts.find(item => item.postId === id); // gets the post which is related to the id
   if (!post) return res.status(404).send("Post not found"); // checks if the post exist
 
-  res.render("edit.ejs", { post });
+  res.render("edit.ejs", { post, pageName: "Edit" });
 
 });
 
