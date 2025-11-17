@@ -2,12 +2,19 @@
     
 <form action="/edit/<%= post.postId %>?_method=PUT" method="post">
 
-    <label for="tittle">Tittle</label>
-    <input type="text" name="tittle" class="tittle" value="<%= post.tittle %>">
+    <div class="container my-4">
+        
+        <button type="submit" class="btn btn-primary btn-lg mb-4">Edit Post</button>
 
-    <label for="content">Content</label>
-    <textarea name="content" id="content"><%= post.content %></textarea>
-    <button type="submit">Edit Post</button>
+        <div class="form-floating mb-4">
+            <input type="text" id="floatingTittle" autocomplete="off" name="tittle" class="form-control" placeholder="Tittle" required value="<%= post.tittle %>">
+            <label for="floatingTittle">Tittle</label>
+        </div>
+        <div class="form-floating">
+            <textarea name="content" id="floatingContent" class="form-control" placeholder="Text" ><%= post.content %></textarea>
+            <label for="floatingContent">Content</label>
+        </div>
+    </div>
 
 </form>
 

@@ -1,14 +1,20 @@
 <%- include("partials/header.ejs") %>
 
 <form action="/create" method="post">
+    
+    <div class="container my-4">
+        
+        <button type="submit" class="btn btn-primary btn-lg mb-4">Create Post</button>
 
-    <label for="tittle">Tittle</label>
-    <input type="text" name="tittle" class="tittle" placeholder="Tittle">
-
-    <label for="content">Content</label>
-    <input type="text" name="content" class="content" placeholder="Text">
-
-    <button type="submit">Create Post</button>
+        <div class="form-floating mb-4">
+            <input type="text" id="floatingTittle" autocomplete="off" name="tittle" class="form-control" placeholder="Tittle" required>
+            <label for="floatingTittle">Tittle</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="floatingContent" name="content" class="form-control" placeholder="Text" required></textarea>
+            <label for="floatingContent">Text</label>
+        </div>
+    </div>
 
 </form>
 
