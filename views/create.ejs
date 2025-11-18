@@ -1,21 +1,49 @@
 <%- include("partials/header.ejs") %>
 
 <form action="/create" method="post">
-    
+
     <div class="container my-4">
-        
+
         <button type="submit" class="btn btn-primary btn-lg mb-4">Create Post</button>
 
         <div class="form-floating mb-4">
-            <input type="text" id="floatingTittle" autocomplete="off" name="tittle" class="form-control" placeholder="Tittle" required>
+            <input type="text" id="floatingTittle" autocomplete="off" name="tittle" class="form-control"
+                placeholder="Tittle" required>
             <label for="floatingTittle">Tittle</label>
         </div>
         <div class="form-floating">
-            <textarea id="floatingContent" name="content" class="form-control" placeholder="Text" required></textarea>
+            <textarea id="floatingContent" name="content" class="form-control" placeholder="Text"
+                required></textarea>
             <label for="floatingContent">Text</label>
         </div>
     </div>
 
 </form>
+
+<% if (locals.message) { %>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // selects the toast's element
+            const toastEl = document.querySelector(".toast");
+
+            // create new stance of bootstrap toast
+            const toast = new bootstrap.Toast(toastEl);
+
+            // show toast
+            toast.show();
+
+        })
+    </script>
+<% } %>    
+
+<div class="toast align-items-center text-bg-primary bg-danger border-0 position-absolute bottom-0 start-50 translate-middle-x mb-4" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            <%= locals.message %>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
 
 <%- include("partials/footer.ejs") %>

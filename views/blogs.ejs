@@ -1,13 +1,13 @@
 <%- include("partials/header.ejs") %>
 
 <div class="container row">
-        <% if (post.length===0) { %>
+        <% if (userPosts.length===0) { %>
             <div class="container">
                 <p>There is no post yet!</p>
                 <a href="/create"><button class="btn btn-primary">Create Post</button></a>
             </div>
             <% }else { %>
-                <% post.forEach(item=> { %>
+                <% userPosts.forEach(item=> { %>
                     <div class="col-md-4">
                         <div
                             class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
