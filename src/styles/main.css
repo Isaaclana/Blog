@@ -25,3 +25,20 @@ li::before{
 li:hover::before{
     width: 100%;
 }
+
+.icon-hover{
+    transition: color 0.3s ease; 
+}
+
+.tooltip-box{
+    display: none;
+    z-index: 10;
+}
+
+.icon-hover:hover + .tooltip-box{
+    display: block;
+}
+
+.icon-hover:hover{
+    color: #0d6efd; 
+}

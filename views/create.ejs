@@ -11,14 +11,43 @@
                 placeholder="Tittle" required>
             <label for="floatingTittle">Tittle</label>
         </div>
+
         <div class="form-floating">
             <textarea id="floatingContent" name="content" class="form-control" placeholder="Text"
                 required></textarea>
             <label for="floatingContent">Text</label>
         </div>
+        
     </div>
 
 </form>
+
+<div class="tip-box col-1 position-absolute bottom-0 end-0 mb-4 fs-1">
+    <div class="light-icon position-relative">
+
+        <i class="bi bi-lightbulb-fill icon-hover"></i>
+
+        <!-- Container do popup (Tooltip) -->
+        <div class="tooltip-box position-absolute bottom-100 start-50 translate-middle-x mb-2 d-none">
+            <div class="tooltip-content p-2 bg-dark text-white rounded">
+                <span>Informação sobre o ícone</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const tooltipTriggerList = document.querySelectorAll('.icon-hover');
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl, {
+                title: 'To expand the text area place your cursor on the edge of the box (it is only possible to change the height).',  
+                placement: 'top'
+            });
+        });
+    });
+</script>
 
 <% if (locals.message) { %>
     <script>
