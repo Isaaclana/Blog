@@ -5,8 +5,8 @@ import methodOverride from "method-override";
 const app = express();
 const port = 3000;
 
-app.use(express.static("src"));
 app.use(methodOverride("_method"));
+app.use(express.static("src"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const posts = [{
@@ -83,6 +83,7 @@ app.get("/blogs", (req, res) => {
 
 });
 
+
 // =================== Edit and Delete Post ===================
 
 app.get("/edit/:id", (req, res) => {
@@ -111,16 +112,32 @@ app.put("/edit/:id", (req, res) => {
 
 });
 
-app.delete("/edit/:id", (req, res) => {
+app.delete("/delete/:id", (req, res) => {
 
   const id = Number(req.params.id);
 
   const post = posts.findIndex(item => item.postId === id); // findIndex() is more appropriated to find an array value. find() only returns the value of the item selected
+  const usersPosts = userPosts.findIndex(item => item.postId === id);
+  if (userPosts === -1) return res.status(404).send("Post not found");
   if (post === -1) return res.status(404).send("Post not found");
 
   posts.splice(post, 1) // removes 1 element in the positioning of post
+  userPosts.splice(usersPosts, 1);
 
-  res.redirect("/blogs");
+  res.render("blogs.ejs", { userPosts, pageName: "My Posts" });
+
+});
+
+// =================== Content Blog Page ===================
+
+app.get("/:tittle", (req, res) => {
+
+  const tittle = Number(req.params.post);
+  const post = posts.findIndex(item => item.tittle === tittle);
+
+  if (post === -1) return res.status(404).send("Post not found");
+
+  res.render("content.ejs", { post: posts, pageName: tittle });
 
 });
 
