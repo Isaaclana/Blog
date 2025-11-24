@@ -59,8 +59,9 @@ app.post("/create", (req, res) => {
   };
 
   const existentPost = posts.find(item => item.tittle === newPost.tittle);
+  const existentContent = posts.find(item => item.content === newPost.content);
 
-  if (existentPost) { 
+  if (existentPost || existentContent) { 
 
     const errorMessage = "Post already exist!";
     return res.render("create.ejs", { message: errorMessage, pageName: "Create" });
@@ -130,14 +131,14 @@ app.delete("/delete/:id", (req, res) => {
 
 // =================== Content Blog Page ===================
 
-app.get("/:tittle", (req, res) => {
+app.get("/content/:tittle", (req, res) => {
 
-  const tittle = Number(req.params.post);
-  const post = posts.findIndex(item => item.tittle === tittle);
+  const tittle = req.params.tittle;
+  const post = posts.find(item => item.tittle === tittle);
 
-  if (post === -1) return res.status(404).send("Post not found");
+  if (!post) return res.status(404).send("Post not found");
 
-  res.render("content.ejs", { post: posts, pageName: tittle });
+  res.render("content.ejs", { post, pageName: "" });
 
 });
 

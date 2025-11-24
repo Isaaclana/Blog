@@ -8,27 +8,27 @@
         </div>
         <% }else { %>
             <% userPosts.forEach(item=> { %>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-5">
                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h2 class="mb-2"><%= item.tittle %></h2>
                             <div class="mb-2 text-body-secondary"><%= item.dateOfCreation %></div>
                             <p class="card-text mb-auto">"<%= item.content.substring(0, 100) %>"...</p>
-                            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                            <a href="content/<%= item.tittle %>" class="icon-link gap-1 icon-link-hover stretched-link">
                                 Continue reading <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"></use></svg>
                             </a>
                         </div>
                     </div>
 
-                    <div class="buttons d-flex flex-direction-row justify-content-around fs-4">
+                    <div class="buttons d-flex flex-direction-row justify-content-around fs-4 gap-3">
                         
-                        <a href="/edit/<%= item.postId %>" class="text-light">
+                        <a href="/edit/<%= item.postId %>" class="text-light d-grid col-3 mx-auto">
                             <button class="btn btn-primary" type="button">
                                 <i class="bi bi-pen"></i>
                             </button>
                         </a>
 
-                        <button type="submit" class="btn btn-primary" onclick="deletePost(<%= item.postId %>)">
+                        <button type="submit" class="btn btn-primary d-grid col-3 mx-auto" onclick="deletePost(<%= item.postId %>)">
                             <i class="bi bi-trash text-light"></i>
                         </button>
                     </div>

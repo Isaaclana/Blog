@@ -1,8 +1,18 @@
 <%- include("partials/header.ejs") %>
 
 <div class="container">
+
     <h1><%= post.tittle %></h1>
-    <div class="content"><%= post.content %></div>
+    <br>
+    <div class="content">
+    <%- post.content
+        .split(/\n\s*\n/)           // separa parágrafos
+        .map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`)
+        .join("") 
+    %>
+</div>
+
+
 </div>
 
 <%- include("partials/footer.ejs") %>
